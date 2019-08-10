@@ -8,7 +8,7 @@ COPY oracle-driver/module.xml /opt/eap/modules/system/layers/openshift/com/oracl
 
 COPY oracle-driver/ojdbc8.jar /opt/eap/modules/system/layers/openshift/com/oracle/main
 
-COPY themes/custom /opt/eap/themes
+COPY theme /opt/eap/themes
 
 COPY spis/rest-service-storage-spi-jar-with-dependencies.jar /opt/eap/standalone/deployments
 
