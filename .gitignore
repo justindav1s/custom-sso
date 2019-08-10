@@ -36,3 +36,4 @@ hs_err_pid*
 /certs/datr.eu.jks
 /certs/datr.eu.crt
 /certs/ca.crt
+!/themes/custom-theme.jar
