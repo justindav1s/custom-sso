@@ -1,0 +1,46 @@
+kind: Template
+apiVersion: v1
+objects:
+  - kind: BuildConfig
+    apiVersion: v1
+    metadata:
+      labels:
+        app: ${APP_LABEL}
+        build: ${RESOURCE_NAME}
+      name: ${RESOURCE_NAME}
+    spec:
+      source:
+        type: Binary
+        binary: {}
+      strategy:
+        type: Docker
+        dockerStrategy: {}
+      output:
+        to:
+          kind: DockerImage
+          name: ${DOCKER_REGISTRY}/${NAMESPACE}/${RESOURCE_NAME}:${IMAGE_VERSION}
+      runPolicy: Serial
+      resources: {}
+      postCommit: {}
+      nodeSelector: null
+parameters:
+  - name: RESOURCE_NAME
+    displayName: Resource Name
+    description: The name of the build configuration resource that also matches image stream resource.
+    required: true
+  - name: APP_LABEL
+    displayName: Application Label
+    description: Name of the application label that should be used in all resources.
+    required: true
+  - name: DOCKER_REGISTRY
+    displayName: External Docker Registry
+    description: Prefix with External Docker Registry to use when tagging image, before push.
+    required: true
+  - name: IMAGE_VERSION
+    displayName: Image Version
+    description: Version of specific image to pull from external Docker registry.
+    required: true
+  - name: NAMESPACE
+    displayName: Namespace
+    description: Namespace of specific image to pull from external Docker registry.
+    required: true

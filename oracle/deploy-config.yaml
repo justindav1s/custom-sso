@@ -1,0 +1,102 @@
+kind: Template
+apiVersion: v1
+objects:
+  - apiVersion: v1
+    kind: ServiceAccount
+    metadata:
+      annotations:
+      labels:
+        app: ${APPLICATION}
+      name: ${APPLICATION}
+
+  - kind: DeploymentConfig
+    apiVersion: v1
+    metadata:
+      labels:
+        app: ${APPLICATION}
+      name: ${APPLICATION}
+    spec:
+      replicas: 1
+      selector:
+        app: ${APPLICATION}
+      strategy:
+        type: Rolling
+        rollingParams:
+          updatePeriodSeconds: 1
+          intervalSeconds: 1
+          timeoutSeconds: 300
+          maxSurge: 1
+          maxUnavailable: 0
+      template:
+        metadata:
+          labels:
+            app: ${APPLICATION}
+        spec:
+          containers:
+          - env:
+            - name: ORACLE_ALLOW_REMOTE
+              value: "true"
+            image: ${IMAGE}:${IMAGE_TAG}
+            imagePullPolicy: Always
+            name: ${APPLICATION}
+            resources:
+              requests:
+                memory: 512Mi
+              limits:
+                memory: 512Mi
+          restartPolicy: Always
+          securityContext:
+            privileged: "true"
+          serviceAccount: ${APPLICATION}
+          serviceAccountName: ${APPLICATION}
+      triggers: []
+
+  - kind: Service
+    apiVersion: v1
+    metadata:
+      labels:
+        app: ${APPLICATION}
+      name: ${APPLICATION}-jdbc
+    spec:
+      selector:
+        app: ${APPLICATION}
+      ports:
+        - port: 1521
+          protocol: TCP
+          targetPort: 1521
+      sessionAffinity: ClientIP
+      type: ClusterIP
+
+  - kind: Service
+    apiVersion: v1
+    metadata:
+      labels:
+        app: ${APPLICATION}
+      name: ${APPLICATION}-apex
+    spec:
+      selector:
+        app: ${APPLICATION}
+      ports:
+        - port: 8080
+          protocol: TCP
+          targetPort: 8080
+      sessionAffinity: ClientIP
+      type: ClusterIP
+
+parameters:
+  - name: APPLICATION
+    displayName: Application Label
+    description: Name of the application label that should be used in all resources.
+    value: "oracle-xe"
+    required: true
+  - name: IMAGE
+    displayName: Image Reference
+    description: Complete reference to an image in external Docker Registry.
+    value: "oracleinanutshell/oracle-xe-11g"
+    required: true
+  - name: IMAGE_TAG
+    displayName: Image Version
+    description: Version of specific image to pull from external Docker registry.
+    value: "latest"
+    required: true
+

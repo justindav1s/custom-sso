@@ -1,0 +1,28 @@
+kind: Template
+apiVersion: v1
+objects:
+  - kind: Service
+    apiVersion: v1
+    metadata:
+      labels:
+        app: ${APP_LABEL}
+      name: ${RESOURCE_NAME}
+    spec:
+      selector:
+        app: ${RESOURCE_NAME}
+      ports:
+        - port: 10000
+          protocol: TCP
+          targetPort: 10000
+      sessionAffinity: ClientIP
+      type: ClusterIP
+parameters:
+  - name: RESOURCE_NAME
+    displayName: Resource Name
+    description: The name of the service resource that also matches POD app label.
+    required: true
+  - name: APP_LABEL
+    displayName: Application Label
+    description: Name of the application label that should be used in all resources.
+    required: true
+
