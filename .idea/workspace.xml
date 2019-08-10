@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f61309de-614a-44d9-9e0f-134e4e0abed5" name="Default Changelist" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/certs/ca.cer" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/certs/ca.crt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/certs/convert2pem.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/certs/create_keystores.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/certs/datr.eu.cer" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/certs/datr.eu.crt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/certs/datr.eu.jks" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/certs/datr.eu.key" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/certs/datr.eu.p12" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/certs/extract_pub_key_from_cert.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/certs/fullchain.cer" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/certs/jgroups.jceks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build-config.yaml" beforeDir="false" />
+    <list default="true" id="f61309de-614a-44d9-9e0f-134e4e0abed5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/oracle/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +25,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sso73-https.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="4615">
@@ -66,7 +55,18 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-91" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/oracle/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="56" selection-start-column="56" selection-end-column="56" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -104,20 +104,9 @@
         <option value="$PROJECT_DIR$/deploy.sh" />
         <option value="$PROJECT_DIR$/sso73-https.json" />
         <option value="$PROJECT_DIR$/theme/META-INF/keycloak-themes.json" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Dockerfile" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/custom-sso.iml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-        <option value="$PROJECT_DIR$/.idea/codeStyles/Project.xml" />
-        <option value="$PROJECT_DIR$/.idea/dictionaries/jusdavis.xml" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/oracle/README.md" />
       </list>
     </option>
   </component>
@@ -143,6 +132,21 @@
               <item name="custom-sso" type="b2602c69:ProjectViewProjectNode" />
               <item name="custom-sso" type="462c0819:PsiDirectoryNode" />
               <item name="certs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="custom-sso" type="b2602c69:ProjectViewProjectNode" />
+              <item name="custom-sso" type="462c0819:PsiDirectoryNode" />
+              <item name="oracle" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="custom-sso" type="b2602c69:ProjectViewProjectNode" />
+              <item name="custom-sso" type="462c0819:PsiDirectoryNode" />
+              <item name="oracle-driver" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="custom-sso" type="b2602c69:ProjectViewProjectNode" />
+              <item name="custom-sso" type="462c0819:PsiDirectoryNode" />
+              <item name="spis" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="custom-sso" type="b2602c69:ProjectViewProjectNode" />
@@ -257,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565463580599</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="initial commit">
+      <created>1565463882050</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1565463882050</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -367,9 +378,6 @@
     <entry file="file://$PROJECT_DIR$/themes/theme/custom/admin/index.ftl">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/themes/META-INF/keycloak-themes.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="39">
@@ -388,6 +396,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4615">
           <caret line="355" column="58" selection-start-line="355" selection-start-column="58" selection-end-line="355" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-91" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oracle/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="56" selection-start-column="56" selection-end-column="56" />
         </state>
       </provider>
     </entry>
