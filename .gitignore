@@ -24,3 +24,15 @@ hs_err_pid*
 !/spis/rest-service-storage-spi-jar-with-dependencies.jar
 !/oracle-driver/ojdbc8.jar
 !/custom-theme.zip
+/certs/convert2pem.sh
+/certs/datr.eu.key
+/certs/create_keystores.sh
+/certs/datr.eu.p12
+/certs/datr.eu.cer
+/certs/ca.cer
+/certs/extract_pub_key_from_cert.sh
+/certs/jgroups.jceks
+/certs/fullchain.cer
+/certs/datr.eu.jks
+/certs/datr.eu.crt
+/certs/ca.crt
