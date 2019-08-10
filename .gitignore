@@ -37,3 +37,6 @@ hs_err_pid*
 /certs/datr.eu.crt
 /certs/ca.crt
 !/themes/custom-theme.jar
+!/certs/extract_pub_key_from_cert.sh
+!/certs/convert2pem.sh
+!/certs/create_keystores.sh
