@@ -4,7 +4,7 @@ oc login https://ocp.datr.eu:8443 -u justin
 
 
 APP=oracle-xe
-PROJECT=custom-sso
+PROJECT=$APP-1
 
 oc delete project $PROJECT
 oc new-project $PROJECT 2> /dev/null
@@ -18,7 +18,7 @@ oc project $PROJECT
 
 oc new-app -f deploy-config.yaml \
  -p APPLICATION=$APP \
- -p IMAGE="oracleinanutshell/oracle-xe-11g" \
+ -p IMAGE="webdizz/oracle-xe-11g-sa" \
  -p IMAGE_TAG="latest"
 
 oc adm policy add-scc-to-user privileged -z $APP
