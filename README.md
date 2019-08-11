@@ -8,6 +8,18 @@ also
 
 https://www.oracle.com/technetwork/database/enterprise-edition/databaseappdev-vm-161299.html
 
+also
+
+https://hub.docker.com/u/justindav1s/content/sub-85b1342e-98f7-42ca-8792-408196f49f3c
+
+docker run -d -it -P --name keycloakdb -v /Users/jusdavis/OracleDBData:/ORCL store/oracle/database-enterprise:12.2.0.1
+
+docker exec -it keycloakdb bash -c "source /home/oracle/.bashrc; /bin/bash"
+
+sqlplus sys/Oradoc_db1@ORCLCDB as sysdba
+
+alter session set "_ORACLE_SCRIPT"=true;
+
 CREATE USER keycloak IDENTIFIED BY changeme;
 GRANT create session TO keycloak;
 GRANT create table TO keycloak;
@@ -37,7 +49,7 @@ CREATE TABLE "USERS"."USERS"
 	"LASTNAME" VARCHAR2(20 BYTE),
 	"EMAIL" VARCHAR2(20 BYTE),
 	"ROLES" VARCHAR2(100 BYTE),
-	 CONSTRAINT "USERS_PK" PRIMARY KEY ("ID"))
+	 CONSTRAINT "USERS_PK" PRIMARY KEY ("ID"));
 
 INSERT INTO USERS (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, ROLES) VALUES ('1', 'justin', 'changeme', 'Justin', 'Davis', 'justin@email.com', 'fish, dairy, arable');
 INSERT INTO USERS (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, ROLES) VALUES ('2', 'test1', 'changeme', 'Test', 'One', 'test1@email.com', 'fish');
@@ -54,9 +66,17 @@ https://access.redhat.com/solutions/3250791
 
 https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.2/html-single/configuration_guide/index#example_oracle_datasource
 
-10132  docker login registry.redhat.io
-10133  docker pull registry.redhat.io/redhat-sso-7/sso73-openshift
-10134  docker run -it --rm registry.redhat.io/redhat-sso-7/sso73-openshift /bin/bash
+docker login registry.redhat.io
+docker pull registry.redhat.io/redhat-sso-7/sso73-openshift
+docker run -it --rm registry.redhat.io/redhat-sso-7/sso73-openshift /bin/bash
+
+
+
+http://www.janua.fr/understanding-keycloak-user-federation/
+
+ARJUNA012141: Multiple last resources have been added to the current transaction.
+https://access.redhat.com/solutions/3362101
+https://access.redhat.com/solutions/912183
 
 
 
