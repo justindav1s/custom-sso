@@ -16,4 +16,10 @@ RUN cp /opt/eap/standalone/configuration/standalone-openshift.xml /opt/eap/stand
 
 COPY config/standalone-openshift-base-oracle.xml /opt/eap/standalone/configuration/standalone-openshift.xml
 
+RUN cp /opt/eap/bin/launch/openshift-common.sh /opt/eap/bin/launch/openshift-common.original
+
+COPY config/openshift-common.sh /opt/eap/bin/launch/openshift-common.sh
+
+RUN chmod 755 /opt/eap/bin/launch/openshift-common.sh
+
 USER 1001
