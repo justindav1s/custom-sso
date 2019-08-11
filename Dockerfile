@@ -1,4 +1,4 @@
-FROM registry.redhat.io/redhat-sso-7/sso73-openshift:latest
+FROM docker-registry.default.svc:5000/openshift/redhat-sso73-openshift:latest
 
 USER root
 
