@@ -4,6 +4,10 @@
 
 https://hub.docker.com/r/webdizz/oracle-xe-11g-sa
 
+also
+
+https://www.oracle.com/technetwork/database/enterprise-edition/databaseappdev-vm-161299.html
+
 CREATE USER keycloak IDENTIFIED BY changeme;
 GRANT create session TO keycloak;
 GRANT create table TO keycloak;
@@ -25,6 +29,19 @@ GRANT create sequence TO users;
 GRANT create synonym TO users;
 GRANT CONNECT, RESOURCE, DBA TO users;
 
+CREATE TABLE "USERS"."USERS"
+   ("ID" VARCHAR2(20 BYTE) NOT NULL ENABLE,
+	"USERNAME" VARCHAR2(20 BYTE) NOT NULL ENABLE,
+	"PASSWORD" VARCHAR2(20 BYTE) NOT NULL ENABLE,
+	"FIRSTNAME" VARCHAR2(20 BYTE),
+	"LASTNAME" VARCHAR2(20 BYTE),
+	"EMAIL" VARCHAR2(20 BYTE),
+	"ROLES" VARCHAR2(100 BYTE),
+	 CONSTRAINT "USERS_PK" PRIMARY KEY ("ID"))
+
+INSERT INTO USERS (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, ROLES) VALUES ('1', 'justin', 'changeme', 'Justin', 'Davis', 'justin@email.com', 'fish, dairy, arable');
+INSERT INTO USERS (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, ROLES) VALUES ('2', 'test1', 'changeme', 'Test', 'One', 'test1@email.com', 'fish');
+INSERT INTO USERS (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, ROLES) VALUES ('3', 'test2', 'changeme', 'Test', 'Two', 'test2@email.com', 'dairy, arable');
 
 ## Configuring RHSSO to use Oracle on start up.
 
