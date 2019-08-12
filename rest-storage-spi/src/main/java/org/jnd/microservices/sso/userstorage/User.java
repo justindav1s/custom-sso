@@ -3,7 +3,6 @@ package org.jnd.microservices.sso.userstorage;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
 
@@ -19,30 +18,14 @@ public class User implements Serializable {
     private String password;
     private HashSet groups = new HashSet();
     private HashSet roles= new HashSet();
-    private HashMap<String, String> attributes = new HashMap<>();
 
-    public User(String username, String password, String firstname, String lastname, String email, String id) {
+    public User(String username, String password, String firstname, String lastname, String email) {
         this.username = username;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        this.id = id;
-    }
-
-    public User(String username, String password, String firstname, String lastname, String email, String id, String roles) {
-        this.username = username;
-        this.password = password;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.id = id;
-
-        String[] rolesArr = roles.split(",");
-        for (String role : rolesArr)    {
-            this.roles.add(role.trim());
-        }
-
+        this.id = UUID.randomUUID().toString();
     }
 
     public User(String username, String password) {

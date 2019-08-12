@@ -3,28 +3,19 @@ package org.jnd.microservices.sso.userstorage;
 import org.keycloak.component.ComponentModel;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
-import org.keycloak.models.RoleContainerModel;
-import org.keycloak.models.RoleModel;
 import org.keycloak.storage.StorageId;
 import org.keycloak.storage.adapter.AbstractUserAdapterFederatedStorage;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class FederatedUserAdapter extends AbstractUserAdapterFederatedStorage {
 
     private final User user;
     private final String keycloakId;
 
-    private static final org.jboss.logging.Logger log = org.jboss.logging.Logger.getLogger(JdbcUserStorageProvider.class);
+    private static final org.jboss.logging.Logger log = org.jboss.logging.Logger.getLogger(RestServiceUserStorageProvider.class);
 
     public FederatedUserAdapter(KeycloakSession session, RealmModel realm, ComponentModel model, User user) {
         super(session, realm, model);
         this.user = user;
-
-        log.info("FederatedUserAdapter : constructor user : "+ this.user);
-        log.info("FederatedUserAdapter : constructor user id : "+ this.user.getId());
-
         this.keycloakId = StorageId.keycloakId(model, user.getId());
     }
 
@@ -73,10 +64,5 @@ public class FederatedUserAdapter extends AbstractUserAdapterFederatedStorage {
     @Override
     public void setLastName(String lastName) {
         user.setLastname(lastName);
-    }
-
-    @Override
-    protected Set<RoleModel> getFederatedRoleMappings() {
-        return getFederatedStorage().getRoleMappings(realm, this.getId());
     }
 }

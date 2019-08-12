@@ -21,21 +21,23 @@ import java.util.HashMap;
 public class DatabaseProxy {
 
     private DataSource datasource = null;
-    private Connection conn = null;
+
     HashMap<String, User> users = new HashMap<>();
 
     public DatabaseProxy(DataSource datasource)    {
 
         this.datasource = datasource;
+    }
+
+    private Connection getConnection() {
+        Connection conn = null;
         try {
-            this.conn = datasource.getConnection();
+            conn = datasource.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return conn;
     }
-
-
 
 
     public User getUserByUsername(User user) {
@@ -45,7 +47,9 @@ public class DatabaseProxy {
         String sql = "SELECT * from Users WHERE USERNAME='"+user.getUsername()+"'";
 
         User userFromDb = null;
+
         try {
+            Connection conn = getConnection();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next())
@@ -64,6 +68,7 @@ public class DatabaseProxy {
             }
             rs.close();
             st.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -80,6 +85,7 @@ public class DatabaseProxy {
 
         User userFromDb = null;
         try {
+            Connection conn = getConnection();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next())
@@ -98,6 +104,7 @@ public class DatabaseProxy {
             }
             rs.close();
             st.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -135,8 +142,37 @@ public class DatabaseProxy {
 
         log.info("DatabaseProxy : getAllUsers");
 
-        User[] usersarr = new User[users.entrySet().size()];
-        users.entrySet().toArray(usersarr);
+        String sql = "SELECT * from Users";
+        ArrayList<User> allUsers = new ArrayList<>();
+        User userFromDb = null;
+        try {
+            Connection conn = getConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next())
+            {
+                String id = rs.getString("id");
+                String firstname = rs.getString("FIRSTNAME");
+                String lastname = rs.getString("LASTNAME");
+                String username = rs.getString("USERNAME");
+                String password = rs.getString("PASSWORD");
+                String roles = rs.getString("ROLES");
+                String email = rs.getString("EMAIL");
+
+                log.info("DatabaseProxy : from database "+" id :"+id+" username :"+username+" password :"+password+" firstname :"+firstname+" lastname :"+lastname+" email :"+email+" roles :"+roles);
+
+                userFromDb = new User(username, password, firstname, lastname, email, id, roles);
+                allUsers.add(userFromDb);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        User[] usersarr = new User[allUsers.size()];
+        allUsers.toArray(usersarr);
 
         return usersarr;
     }
@@ -144,8 +180,24 @@ public class DatabaseProxy {
     public int getUsersCount() {
 
         log.info("DatabaseProxy : getUsersCount");
+        String sql = "SELECT COUNT(*) AS count FROM Users";
 
-        int count = users.size();
+        int count = 0;
+        try {
+            Connection conn = getConnection();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next())
+            {
+                count = rs.getInt("count");
+                log.info("DatabaseProxy : from database "+" count :"+count);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return count;
     }
