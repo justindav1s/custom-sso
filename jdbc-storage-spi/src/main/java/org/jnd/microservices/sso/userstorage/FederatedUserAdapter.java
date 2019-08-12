@@ -1,10 +1,7 @@
 package org.jnd.microservices.sso.userstorage;
 
 import org.keycloak.component.ComponentModel;
-import org.keycloak.models.KeycloakSession;
-import org.keycloak.models.RealmModel;
-import org.keycloak.models.RoleContainerModel;
-import org.keycloak.models.RoleModel;
+import org.keycloak.models.*;
 import org.keycloak.storage.StorageId;
 import org.keycloak.storage.adapter.AbstractUserAdapterFederatedStorage;
 
@@ -96,5 +93,36 @@ public class FederatedUserAdapter extends AbstractUserAdapterFederatedStorage {
             attributes.put(key, values);
         }
         return attributes;
+    }
+
+    @Override
+    public Set<GroupModel> getGroups()  {
+        log.info("FederatedUserAdapter : getGroups");
+        Set<GroupModel> groupset = new HashSet<>();
+        for (GroupModel group : realm.getGroups()) {
+            for (String groupName : user.getGroups()) {
+                if (group.getName().equals(groupName)) {
+                    groupset.add(group);
+                }
+            }
+        }
+        return groupset;
+    }
+
+    @Override
+    public  Set<RoleModel> getRoleMappings() {
+        log.info("FederatedUserAdapter : getRoleMappings");
+        Set<RoleModel> rmset = new HashSet<>();
+        for (String userrole : user.getRoles()) {
+            for (RoleModel rm : realm.getRoles()) {
+                if (rm.getName().equals(userrole)) {
+                    rmset.add(rm);
+                }
+            }
+        }
+        for (RoleModel role : rmset)  {
+            log.info("FederatedUserAdapter : getRoleMappings role : "+role.getName());
+        }
+        return rmset;
     }
 }
