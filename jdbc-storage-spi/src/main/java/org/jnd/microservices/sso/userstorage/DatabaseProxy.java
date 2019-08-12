@@ -68,7 +68,7 @@ public class DatabaseProxy {
                         +" firstname :"+firstname+" lastname :"+lastname+" email :"+email+" roles :"+roles
                         +" groups :"+groups+" phone :"+phone);
 
-                userFromDb = new User(username, password, firstname, lastname, email, id, roles);
+                userFromDb = new User(id, username, password, firstname, lastname, email, phone, roles, groups);
             }
             rs.close();
             st.close();
@@ -108,7 +108,7 @@ public class DatabaseProxy {
                         +" firstname :"+firstname+" lastname :"+lastname+" email :"+email+" roles :"+roles
                         +" groups :"+groups+" phone :"+phone);
 
-                userFromDb = new User(username, password, firstname, lastname, email, id, roles);
+                userFromDb = new User(id, username, password, firstname, lastname, email, phone, roles, groups);
             }
             rs.close();
             st.close();
@@ -173,7 +173,7 @@ public class DatabaseProxy {
                         +" firstname :"+firstname+" lastname :"+lastname+" email :"+email+" roles :"+roles
                         +" groups :"+groups+" phone :"+phone);
 
-                userFromDb = new User(username, password, firstname, lastname, email, id, roles);
+                userFromDb = new User(id, username, password, firstname, lastname, email, phone, roles, groups);
                 allUsers.add(userFromDb);
             }
             rs.close();

@@ -21,7 +21,7 @@ public class User implements Serializable {
     private HashSet roles= new HashSet();
     private HashMap<String, String> attributes = new HashMap<>();
 
-    public User(String username, String password, String firstname, String lastname, String email, String id) {
+    public User(String id, String username, String password, String firstname, String lastname, String email) {
         this.username = username;
         this.password = password;
         this.firstname = firstname;
@@ -30,7 +30,21 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(String username, String password, String firstname, String lastname, String email, String id, String roles) {
+    public User(String id, String username, String password, String firstname, String lastname, String email, String roles) {
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.id = id;
+
+        String[] rolesArr = roles.split(",");
+        for (String role : rolesArr)    {
+            this.roles.add(role.trim());
+        }
+    }
+
+    public User(String id, String username, String password, String firstname, String lastname, String email, String phone, String roles, String groups) {
         this.username = username;
         this.password = password;
         this.firstname = firstname;
@@ -43,6 +57,12 @@ public class User implements Serializable {
             this.roles.add(role.trim());
         }
 
+        String[] groupsArr = groups.split(",");
+        for (String grp : groupsArr)    {
+            this.groups.add(grp.trim());
+        }
+
+        attributes.put("phone", phone);
     }
 
     public User(String username, String password) {
