@@ -2,10 +2,10 @@ package org.jnd.microservices.sso.userstorage;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import java.io.Serializable;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.UUID;
+
 
 
 public class User implements Serializable {
@@ -32,8 +32,6 @@ public class User implements Serializable {
         for (String role : rolesArr)    {
             this.roles.add(role.trim());
         }
-//        this.roles.add("manage-account");
-//        this.roles.add("view-profile");
     }
 
     public User(String id, String username, String password, String firstname, String lastname, String email, String phone, String roles, String groups) {
@@ -48,8 +46,6 @@ public class User implements Serializable {
         for (String role : rolesArr)    {
             this.roles.add(role.trim());
         }
-//        this.roles.add("manage-account");
-//        this.roles.add("view-profile");
 
         String[] groupsArr = groups.split(",");
         for (String grp : groupsArr)    {

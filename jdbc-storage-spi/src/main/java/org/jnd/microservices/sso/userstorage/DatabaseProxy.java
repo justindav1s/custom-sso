@@ -1,14 +1,6 @@
 package org.jnd.microservices.sso.userstorage;
 
 import lombok.extern.jbosslog.JBossLog;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
-
-import javax.sql.ConnectionEvent;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;

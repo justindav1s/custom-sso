@@ -51,9 +51,9 @@ CREATE TABLE "USERS"."USERS"
 	"ROLES" VARCHAR2(100 BYTE),
 	 CONSTRAINT "USERS_PK" PRIMARY KEY ("ID"));
 
-INSERT INTO USERS (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, ROLES) VALUES ('1', 'justin', 'changeme', 'Justin', 'Davis', 'justin@email.com', 'fish, dairy, arable');
-INSERT INTO USERS (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, ROLES) VALUES ('2', 'test1', 'changeme', 'Test', 'One', 'test1@email.com', 'fish');
-INSERT INTO USERS (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, ROLES) VALUES ('3', 'test2', 'changeme', 'Test', 'Two', 'test2@email.com', 'dairy, arable');
+INSERT INTO USERS (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, PHONE, ROLES, GROUPS) VALUES ('1', 'justin', 'changeme', 'Justin', 'Davis', 'justin@email.com', '555 2345', 'fish, dairy, arable', 'user, admin');
+INSERT INTO USERS (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, PHONE, ROLES, GROUPS) VALUES ('2', 'test1', 'changeme', 'Test', 'One', 'test1@email.com', '0489 1234', 'fish', 'user, fisheries');
+INSERT INTO USERS (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, PHONE, ROLES, GROUPS) VALUES ('3', 'test2', 'changeme', 'Test', 'Two', 'test2@email.com', '0789 123456', 'dairy, arable', 'user, farming');
 
 ## Configuring RHSSO to use Oracle on start up.
 
