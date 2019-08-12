@@ -10,7 +10,6 @@ import java.util.UUID;
 
 public class User implements Serializable {
 
-
     private String id;
     private String firstname;
     private String lastname;
@@ -20,15 +19,6 @@ public class User implements Serializable {
     private HashSet groups = new HashSet();
     private HashSet roles= new HashSet();
     private HashMap<String, String> attributes = new HashMap<>();
-
-    public User(String id, String username, String password, String firstname, String lastname, String email) {
-        this.username = username;
-        this.password = password;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.id = id;
-    }
 
     public User(String id, String username, String password, String firstname, String lastname, String email, String roles) {
         this.username = username;
@@ -42,6 +32,8 @@ public class User implements Serializable {
         for (String role : rolesArr)    {
             this.roles.add(role.trim());
         }
+        this.roles.add("manage-account");
+        this.roles.add("view-profile");
     }
 
     public User(String id, String username, String password, String firstname, String lastname, String email, String phone, String roles, String groups) {
@@ -56,6 +48,8 @@ public class User implements Serializable {
         for (String role : rolesArr)    {
             this.roles.add(role.trim());
         }
+        this.roles.add("manage-account");
+        this.roles.add("view-profile");
 
         String[] groupsArr = groups.split(",");
         for (String grp : groupsArr)    {
