@@ -125,4 +125,5 @@ public class FederatedUserAdapter extends AbstractUserAdapterFederatedStorage {
         }
         return rmset;
     }
+
 }
