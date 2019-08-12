@@ -61,8 +61,12 @@ public class DatabaseProxy {
                 String password = rs.getString("PASSWORD");
                 String roles = rs.getString("ROLES");
                 String email = rs.getString("EMAIL");
+                String phone = rs.getString("PHONE");
+                String groups = rs.getString("GROUPS");
 
-                log.info("DatabaseProxy : from database "+" id :"+id+" username :"+username+" password :"+password+" firstname :"+firstname+" lastname :"+lastname+" email :"+email+" roles :"+roles);
+                log.info("DatabaseProxy : getUserByUsername : from database "+" id :"+id+" username :"+username+" password :"+password
+                        +" firstname :"+firstname+" lastname :"+lastname+" email :"+email+" roles :"+roles
+                        +" groups :"+groups+" phone :"+phone);
 
                 userFromDb = new User(username, password, firstname, lastname, email, id, roles);
             }
@@ -97,8 +101,12 @@ public class DatabaseProxy {
                 String password = rs.getString("PASSWORD");
                 String roles = rs.getString("ROLES");
                 String email = rs.getString("EMAIL");
+                String phone = rs.getString("PHONE");
+                String groups = rs.getString("GROUPS");
 
-                log.info("DatabaseProxy : from database "+" id :"+id+" username :"+username+" password :"+password+" firstname :"+firstname+" lastname :"+lastname+" email :"+email+" roles :"+roles);
+                log.info("DatabaseProxy : getUserById : from database "+" id :"+id+" username :"+username+" password :"+password
+                        +" firstname :"+firstname+" lastname :"+lastname+" email :"+email+" roles :"+roles
+                        +" groups :"+groups+" phone :"+phone);
 
                 userFromDb = new User(username, password, firstname, lastname, email, id, roles);
             }
@@ -158,8 +166,12 @@ public class DatabaseProxy {
                 String password = rs.getString("PASSWORD");
                 String roles = rs.getString("ROLES");
                 String email = rs.getString("EMAIL");
+                String phone = rs.getString("PHONE");
+                String groups = rs.getString("GROUPS");
 
-                log.info("DatabaseProxy : from database "+" id :"+id+" username :"+username+" password :"+password+" firstname :"+firstname+" lastname :"+lastname+" email :"+email+" roles :"+roles);
+                log.info("DatabaseProxy : getAllUsers : from database "+" id :"+id+" username :"+username+" password :"+password
+                        +" firstname :"+firstname+" lastname :"+lastname+" email :"+email+" roles :"+roles
+                        +" groups :"+groups+" phone :"+phone);
 
                 userFromDb = new User(username, password, firstname, lastname, email, id, roles);
                 allUsers.add(userFromDb);

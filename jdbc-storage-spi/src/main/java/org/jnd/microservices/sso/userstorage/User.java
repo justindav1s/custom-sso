@@ -132,4 +132,12 @@ public class User implements Serializable {
         }
         return isValid;
     }
+
+    public HashMap<String, String> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(HashMap<String, String> attributes) {
+        this.attributes = attributes;
+    }
 }

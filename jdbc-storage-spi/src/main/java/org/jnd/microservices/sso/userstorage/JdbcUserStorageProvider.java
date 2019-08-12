@@ -65,12 +65,6 @@ public class JdbcUserStorageProvider implements
         user.setUsername(username);
         user = databaseProxy.getUserByUsername(user);
 
-        // Non Federated Code
-        //UserModel usermodel = UserAdapter.createUserModel(realm, this.session, this.model, user);
-        //return usermodel;
-
-
-        // Federated Code
         return new FederatedUserAdapter(this.session, realm, this.model, user);
     }
 
@@ -87,12 +81,6 @@ public class JdbcUserStorageProvider implements
         extuser = databaseProxy.getUserById(extuser);
         log.info("UserLookupProvider : getUserById from external user : "+extuser);
 
-        // Non Federated Code
-        //UserModel usermodel = UserAdapter.createUserModel(realm, this.session, this.model, extuser);
-        //return usermodel;
-
-
-        // Federated Code
         return new FederatedUserAdapter(this.session, realm, this.model, extuser);
     }
 

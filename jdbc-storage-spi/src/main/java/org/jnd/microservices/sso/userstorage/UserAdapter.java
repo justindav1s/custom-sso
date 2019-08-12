@@ -64,7 +64,7 @@ public class UserAdapter {
                 Set<GroupModel> groupset = new HashSet<>();
                 for (GroupModel group : realm.getGroups()) {
                     for (String groupName : user.getGroups()) {
-                        if (group.getName().equals("customer")) {
+                        if (group.getName().equals(groupName)) {
                             groupset.add(group);
                         }
                     }
@@ -74,11 +74,13 @@ public class UserAdapter {
 
             @Override
             public Map<String,List<String>> getAttributes() {
+                log.info("UserAdapter : getRoleMappings");
                 Map<String,List<String>> attributes = new HashMap<String,List<String>>();
-                List<String> values = new ArrayList<>();
-                Date now = new Date();
-                values.add(now.toString());
-                attributes.put("LAST_LOGIN", values);
+                for (String key : user.getAttributes().keySet())    {
+                    List<String> values = new ArrayList<>();
+                    values.add(user.getAttributes().get(key));
+                    attributes.put(key, values);
+                }
                 return attributes;
             }
 
