@@ -48,3 +48,6 @@ hs_err_pid*
 **/*.iml
 .idea
 .idea/**
+!/build/dependencies/ojdbc8.jar
+!/build/dependencies/jdbc-storage-spi-jar-with-dependencies.jar
+!/build/dependencies/custom-theme.jar
