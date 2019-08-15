@@ -1,4 +1,10 @@
-# RHSSO using an Oracle DB
+# Building Customised RHSSO/Keycloak images to run on Openshift
+
+The RHSSO/Keycloak provided by default on Openshift is configured to use H2, Postgresql or MySQL as persisent backends for realm and user data. It also comes bundled with some default UI themes.
+
+It's very often the case that these default components do not meet the requirements
+
+
 
 ## Test DB setup
 
