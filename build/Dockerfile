@@ -18,7 +18,8 @@ COPY dependencies/standalone-openshift-base-oracle.xml /opt/eap/standalone/confi
 
 RUN cp /opt/eap/bin/launch/openshift-common.sh /opt/eap/bin/launch/openshift-common.original
 
-COPY dependencies/openshift-common.sh /opt/eap/bin/launch/openshift-common.sh
+COPY dependenciesubnu00000000634572
+/openshift-common.sh /opt/eap/bin/launch/openshift-common.sh
 
 RUN chmod 755 /opt/eap/bin/launch/openshift-common.sh
 

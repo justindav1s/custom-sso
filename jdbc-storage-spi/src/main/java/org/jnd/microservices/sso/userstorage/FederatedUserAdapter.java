@@ -100,8 +100,11 @@ public class FederatedUserAdapter extends AbstractUserAdapterFederatedStorage {
         log.info("FederatedUserAdapter : getGroups");
         Set<GroupModel> groupset = new HashSet<>();
         for (GroupModel group : realm.getGroups()) {
+            log.info("Realm group : "+group.getName());
             for (String groupName : user.getGroups()) {
+                log.info("Remote User group : "+groupName);
                 if (group.getName().equals(groupName)) {
+                    log.info("Realm User group : "+groupName+" setting up in KC");
                     groupset.add(group);
                 }
             }
@@ -114,14 +117,25 @@ public class FederatedUserAdapter extends AbstractUserAdapterFederatedStorage {
         log.info("FederatedUserAdapter : getRoleMappings");
         Set<RoleModel> rmset = new HashSet<>();
         for (String userrole : user.getRoles()) {
+            log.info("Remote User role : "+userrole);
             for (RoleModel rm : realm.getRoles()) {
+                log.info("Realm role : "+userrole);
                 if (rm.getName().equals(userrole)) {
+                    log.info("Realm role : "+userrole+" setting up in KC");
                     rmset.add(rm);
                 }
             }
+
         }
         for (RoleModel role : rmset)  {
             log.info("FederatedUserAdapter : getRoleMappings role : "+role.getName());
+        }
+
+        for (ClientModel cm : realm.getClients()) {
+            log.info("Realm client : "+cm.getName()+" "+cm.getClientId()+" "+cm.getId());
+            for (RoleModel rm : cm.getRoles()) {
+                log.info("Realm client role : "+cm.getClientId()+" "+rm.getName());
+            }
         }
         return rmset;
     }
