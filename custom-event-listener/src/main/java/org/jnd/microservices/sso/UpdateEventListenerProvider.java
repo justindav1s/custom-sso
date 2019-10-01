@@ -17,6 +17,7 @@
 
 package org.jnd.microservices.sso;
 
+import lombok.extern.jbosslog.JBossLog;
 import org.keycloak.events.Event;
 import org.keycloak.events.EventListenerProvider;
 import org.keycloak.events.EventType;
@@ -29,6 +30,7 @@ import java.util.Set;
 /**
  * @author <a href="mailto:sthorger@redhat.com">Stian Thorgersen</a>
  */
+@JBossLog
 public class UpdateEventListenerProvider implements EventListenerProvider {
 
     private Set<EventType> excludedEvents;
@@ -45,7 +47,7 @@ public class UpdateEventListenerProvider implements EventListenerProvider {
         if (excludedEvents != null && excludedEvents.contains(event.getType())) {
             return;
         } else {
-            System.out.println("EVENT: " + toString(event));
+            log.info("EVENT: " + toString(event));
         }
     }
 
@@ -55,7 +57,7 @@ public class UpdateEventListenerProvider implements EventListenerProvider {
         if (excludedAdminOperations != null && excludedAdminOperations.contains(event.getOperationType())) {
             return;
         } else {
-            System.out.println("EVENT: " + toString(event));
+            log.info("EVENT: " + toString(event));
         }
     }
 

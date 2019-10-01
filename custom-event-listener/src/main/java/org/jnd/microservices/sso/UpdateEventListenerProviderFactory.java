@@ -70,7 +70,7 @@ public class UpdateEventListenerProviderFactory implements EventListenerProvider
 
     @Override
     public String getId() {
-        return "sysout";
+        return "update-event-listener";
     }
 
 }
