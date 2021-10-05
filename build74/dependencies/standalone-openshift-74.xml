@@ -150,17 +150,6 @@
                         <password>changeme</password>
                     </security>
                 </datasource>               
-                <!-- <xa-datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="keycloak_postgresql-DB" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}"> <xa-datasource-property name="DatabaseName">sso</xa-datasource-property> <xa-datasource-property name="PortNumber">5432</xa-datasource-property> <xa-datasource-property name="ServerName">keycloak-postgresql.sso.svc.cluster.local</xa-datasource-property> <driver>postgresql</driver> <security> <user-name>sso</user-name> <password>sso</password> </security> </xa-datasource>
-                <datasource jta="false" jndi-name="java:jboss/datasources/KeycloakDSObjectStore" pool-name="keycloak_postgresqlObjectStorePool" enabled="true"> <connection-url>jdbc:postgresql://keycloak-postgresql.sso.svc.cluster.local:5432/sso</connection-url> <driver>postgresql</driver> <security> <user-name>sso</user-name> <password>sso</password> </security> </datasource> -->
-                <!-- ##DATASOURCES## -->
-                <!-- <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
-                    <driver>h2</driver>
-                    <security>
-                        <user-name>sa</user-name>
-                        <password>sa</password>
-                    </security>
-                </datasource> -->
                 <drivers>
                     <driver name="oracle" module="com.oracle">
                         <xa-datasource-class>oracle.jdbc.xa.client.OracleXADataSource</xa-datasource-class>
