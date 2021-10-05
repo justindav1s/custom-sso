@@ -13,7 +13,6 @@ while [ $? \> 0 ]; do
 oc new-project $PROJECT 2> /dev/null
 done
 
-
 oc policy add-role-to-user view system:serviceaccount:${PROJECT}:default
 
 oc create secret generic sso-jgroup-secret --from-file=certs/jgroups.jceks
@@ -21,18 +20,8 @@ oc create secret generic sso-tls-secret --from-file=certs/${TLS_DOMAIN}.jks
 oc create secret generic sso-app-secret --from-file=certs/${TLS_DOMAIN}.jks
 oc secrets link default sso-jgroup-secret sso-tls-secret sso-app-secret
 
-oc create secret generic sso-config \
-  --from-file=secrets/standalone-openshift.xml \
-  --from-file=secrets/application-roles.properties \
-  --from-file=secrets/application-users.properties \
-  --from-file=secrets/logging.properties \
-  --from-file=secrets/mgmt-groups.properties \
-  --from-file=secrets/mgmt-users.properties \
-  -n custom-sso
-
 oc new-app -f sso74-https.yaml \
  -p APPLICATION_NAME="sso" \
- -p HOSTNAME_HTTP="sso-custom-sso.apps.sno.openshiftlabs.net" \
  -p HOSTNAME_HTTPS="sso-custom-sso.apps.sno.openshiftlabs.net" \
  -p HTTPS_SECRET="sso-tls-secret" \
  -p HTTPS_KEYSTORE="${TLS_DOMAIN}.jks" \

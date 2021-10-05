@@ -291,9 +291,6 @@ objects:
                 - name: sso-truststore-volume
                   mountPath: /etc/sso-secret-volume
                   readOnly: true
-                - name: sso-config-volume
-                  mountPath: /opt/eap/standalone/configuration
-                  readOnly: false
               livenessProbe:
                 exec:
                   command:
@@ -383,20 +380,4 @@ objects:
             - name: sso-truststore-volume
               secret:
                 secretName: '${SSO_TRUSTSTORE_SECRET}'
-            - name: sso-config-volume
-              secret:
-                secretName: 'sso-config' 
-                items:
-                - key: application-roles.properties
-                  path: application-roles.properties
-                - key: application-users.properties
-                  path: application-users.properties                   
-                - key: logging.properties
-                  path: logging.properties                   
-                - key: mgmt-groups.properties
-                  path: mgmt-groups.properties 
-                - key: mgmt-users.properties
-                  path: mgmt-users.properties 
-                - key: standalone-openshift.xml
-                  path: standalone-openshift.xml 
 
