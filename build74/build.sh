@@ -14,7 +14,7 @@ while [ $? \> 0 ]; do
 oc new-project $PROJECT 2> /dev/null
 done
 
-oc  project $PROJECT
+oc project $PROJECT
 
 oc create secret docker-registry quay-dockercfg \
   --docker-server=${QUAYIO_HOST} \
@@ -29,7 +29,7 @@ oc apply -f docker-build-template.yaml \
     -p SOURCE_REPOSITORY_REF="master" \
     -p DOCKERFILE_PATH="build" \
     -p DOCKERFILE_NAME="Dockerfile" \
-    -n PROJECT
+    -n ${PROJECT}
 
 oc start-build custom-sso-docker-build --follow
 
