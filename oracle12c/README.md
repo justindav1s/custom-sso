@@ -7,12 +7,13 @@ https://hub.docker.com/u/justindav1s/content/sub-85b1342e-98f7-42ca-8792-408196f
 
 On pod Terminal
 
-source /home/oracle/.bashrc
+source /home/oracle/.bashrc && sqlplus sys/Oradoc_db1@ORCLCDB as sysdba
 
 sqlplus sys/Oradoc_db1@ORCLCDB as sysdba
 
 alter session set "_ORACLE_SCRIPT"=true;
 CREATE USER keycloak IDENTIFIED BY changeme;
+alter USER keycloak quota 500m on system;
 GRANT create session TO keycloak;
 GRANT create table TO keycloak;
 GRANT create view TO keycloak;

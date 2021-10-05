@@ -16,16 +16,19 @@ done
 
 oc policy add-role-to-user view system:serviceaccount:${PROJECT}:default
 
-# oc delete secret sso-jgroup-secret sso-ssl-secret sso-app-secret
-# oc delete dc sso
-# oc delete svc sso secure-sso sso-ping
-# oc delete route sso secure-sso
-
-
 oc create secret generic sso-jgroup-secret --from-file=certs/jgroups.jceks
 oc create secret generic sso-tls-secret --from-file=certs/${TLS_DOMAIN}.jks
 oc create secret generic sso-app-secret --from-file=certs/${TLS_DOMAIN}.jks
 oc secrets link default sso-jgroup-secret sso-tls-secret sso-app-secret
+
+oc create secret generic sso-config \
+  --from-file=secrets/standalone-openshift.xml \
+  --from-file=secrets/application-roles.properties \
+  --from-file=secrets/application-users.properties \
+  --from-file=secrets/logging.properties \
+  --from-file=secrets/mgmt-groups.properties \
+  --from-file=secrets/mgmt-users.properties \
+  -n custom-sso
 
 oc new-app -f sso74-https.yaml \
  -p APPLICATION_NAME="sso" \
@@ -42,7 +45,6 @@ oc new-app -f sso74-https.yaml \
  -p JGROUPS_ENCRYPT_KEYSTORE="jgroups.jceks" \
  -p JGROUPS_ENCRYPT_NAME="jgroups" \
  -p JGROUPS_ENCRYPT_PASSWORD="changeme" \
- -p JGROUPS_CLUSTER_PASSWORD="changeme" \
  -p SSO_ADMIN_USERNAME="admin" \
  -p SSO_ADMIN_PASSWORD="admin" \
  -p SSO_REALM="demorealm" \
