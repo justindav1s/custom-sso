@@ -261,6 +261,15 @@ objects:
       strategy:
         type: Recreate
       triggers:
+        - type: ImageChange
+          imageChangeParams:
+            automatic: true
+            containerNames:
+              - '${APPLICATION_NAME}'
+            from:
+              kind: ImageStreamTag
+              namespace: '${IMAGE_STREAM_NAMESPACE}'
+              name: 'sso74-openshift-rhel8:7.4'
         - type: ConfigChange
       replicas: 1
       selector:
@@ -277,7 +286,6 @@ objects:
             - name: '${APPLICATION_NAME}'
               image: '${APPLICATION_NAME}'
               imagePullPolicy: Always
-              image: 'quay.io/justindav1s/custom-sso:latest'
               resources:
                 limits:
                   memory: '${MEMORY_LIMIT}'
