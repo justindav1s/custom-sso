@@ -29,7 +29,7 @@ oc process -f docker-build-template.yaml \
     -p SOURCE_REPOSITORY_REF="master" \
     -p DOCKERFILE_PATH="build74" \
     -p DOCKERFILE_NAME="Dockerfile" \
-    -n ${PROJECT} | oc create -f -
+    -n ${PROJECT} | oc apply -f -
 
 oc start-build custom-sso-docker-build --follow
 
