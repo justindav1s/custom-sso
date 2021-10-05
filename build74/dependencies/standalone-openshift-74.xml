@@ -125,18 +125,55 @@
         <subsystem xmlns="urn:jboss:domain:core-management:1.0"/>
         <subsystem xmlns="urn:jboss:domain:datasources:5.0">
             <datasources>
-                <xa-datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="keycloak_postgresql-DB" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}"> <xa-datasource-property name="DatabaseName">sso</xa-datasource-property> <xa-datasource-property name="PortNumber">5432</xa-datasource-property> <xa-datasource-property name="ServerName">keycloak-postgresql.sso.svc.cluster.local</xa-datasource-property> <driver>postgresql</driver> <security> <user-name>sso</user-name> <password>sso</password> </security> </xa-datasource>
-<datasource jta="false" jndi-name="java:jboss/datasources/KeycloakDSObjectStore" pool-name="keycloak_postgresqlObjectStorePool" enabled="true"> <connection-url>jdbc:postgresql://keycloak-postgresql.sso.svc.cluster.local:5432/sso</connection-url> <driver>postgresql</driver> <security> <user-name>sso</user-name> <password>sso</password> </security> </datasource>
-<!-- ##DATASOURCES## -->
-                <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
+                <xa-datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="keycloak_oracle-DB">
+                    <xa-datasource-property name="URL">jdbc:oracle:thin:@oracle12c.oracle-test.svc.cluster.local:1521:ORCLCDB</xa-datasource-property>
+                    <driver>oracle</driver>
+                    <xa-pool>
+                        <is-same-rm-override>false</is-same-rm-override>
+                    </xa-pool>
+                    <security>
+                        <user-name>keycloak</user-name>
+                        <password>changeme</password>
+                    </security>
+                    <validation>
+                        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker"/>
+                        <validate-on-match>true</validate-on-match>
+                        <background-validation>false</background-validation>
+                        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter"/>
+                    </validation>
+                </xa-datasource>
+                <datasource jndi-name="java:jboss/datasources/KeycloakDSObjectStore" pool-name="keycloak_oracleObjectStorePool">
+                    <xa-datasource-property name="URL">jdbc:oracle:thin:@oracle12c.oracle-test.svc.cluster.local:1521:ORCLCDB</xa-datasource-property>
+                    <driver>oracle</driver>
+                    <xa-pool>
+                        <is-same-rm-override>false</is-same-rm-override>
+                    </xa-pool>
+                    <security>
+                        <user-name>keycloak</user-name>
+                        <password>changeme</password>
+                    </security>
+                    <validation>
+                        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleValidConnectionChecker"/>
+                        <validate-on-match>true</validate-on-match>
+                        <background-validation>false</background-validation>
+                        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.oracle.OracleExceptionSorter"/>
+                    </validation>
+                </datasource>               
+                <!-- <xa-datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="keycloak_postgresql-DB" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}"> <xa-datasource-property name="DatabaseName">sso</xa-datasource-property> <xa-datasource-property name="PortNumber">5432</xa-datasource-property> <xa-datasource-property name="ServerName">keycloak-postgresql.sso.svc.cluster.local</xa-datasource-property> <driver>postgresql</driver> <security> <user-name>sso</user-name> <password>sso</password> </security> </xa-datasource>
+                <datasource jta="false" jndi-name="java:jboss/datasources/KeycloakDSObjectStore" pool-name="keycloak_postgresqlObjectStorePool" enabled="true"> <connection-url>jdbc:postgresql://keycloak-postgresql.sso.svc.cluster.local:5432/sso</connection-url> <driver>postgresql</driver> <security> <user-name>sso</user-name> <password>sso</password> </security> </datasource> -->
+                <!-- ##DATASOURCES## -->
+                <!-- <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
                     <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
                     <driver>h2</driver>
                     <security>
                         <user-name>sa</user-name>
                         <password>sa</password>
                     </security>
-                </datasource>
+                </datasource> -->
                 <drivers>
+                    <driver name="oracle" module="com.oracle">
+                        <xa-datasource-class>oracle.jdbc.xa.client.OracleXADataSource</xa-datasource-class>
+                    </driver>       
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
                     </driver>

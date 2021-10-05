@@ -1,4 +1,4 @@
-FROM docker-registry.default.svc:5000/openshift/redhat-sso73-openshift:latest
+FROM docker-registry.default.svc:5000/openshift/redhat-sso74-openshift:latest
 
 USER root
 
@@ -10,6 +10,6 @@ COPY dependencies/ojdbc8.jar /opt/eap/modules/system/layers/openshift/com/oracle
 
 RUN cp /opt/eap/standalone/configuration/standalone-openshift.xml /opt/eap/standalone/configuration/standalone-openshift.original
 
-COPY dependencies/standalone-openshift-base-oracle.xml /opt/eap/standalone/configuration/standalone-openshift.xml
+COPY dependencies/standalone-openshift-74.xml /opt/eap/standalone/configuration/standalone-openshift.xml
 
 USER 1001
