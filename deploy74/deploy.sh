@@ -22,7 +22,6 @@ oc secrets link default sso-jgroup-secret sso-tls-secret sso-app-secret
 
 oc new-app -f sso74-https.yaml \
  -p APPLICATION_NAME="sso" \
- -p HOSTNAME_HTTPS="sso-custom-sso.apps.sno.openshiftlabs.net" \
  -p HTTPS_SECRET="sso-tls-secret" \
  -p HTTPS_KEYSTORE="${TLS_DOMAIN}.jks" \
  -p HTTPS_KEYSTORE_TYPE="JKS" \
