@@ -23,6 +23,8 @@ import org.keycloak.events.EventListenerProvider;
 import org.keycloak.events.EventType;
 import org.keycloak.events.admin.AdminEvent;
 import org.keycloak.events.admin.OperationType;
+import org.keycloak.models.KeycloakSession;
+import org.keycloak.services.resources.KeycloakApplication;
 
 import java.util.Map;
 import java.util.Set;
@@ -48,6 +50,11 @@ public class UpdateEventListenerProvider implements EventListenerProvider {
             return;
         } else {
             log.info("EVENT: " + toString(event));
+            log.info("Type : "+event.getType());
+            if ((event.getType().equals(EventType.UPDATE_PROFILE)))   {
+                log.info("Details : "+event.getDetails());
+                log.info("SessionId : "+event.getSessionId());
+            }
         }
     }
 

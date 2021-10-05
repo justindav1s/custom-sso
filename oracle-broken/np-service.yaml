@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: oracle-xe-jdbc-nodeport
+  namespace: custom-sso
+  labels:
+    app: oracle-xe
+spec:
+  ports:
+    - protocol: TCP
+      port: 1521
+      targetPort: 1521
+  type: Nodeport
+  selector:
+    app: oracle-xe

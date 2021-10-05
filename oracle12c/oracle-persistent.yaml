@@ -1,0 +1,93 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: oracle-persistent
+objects:
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: orcl
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Gi
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    labels:
+      app: oracle12c
+    name: oracle12c
+  spec:
+    replicas: 1
+    selector:
+      app: oracle12c
+      deploymentconfig: oracle12c
+    strategy:
+      activeDeadlineSeconds: 21600
+      recreateParams:
+        timeoutSeconds: 600
+      resources: {}
+      type: Recreate
+    template:
+      metadata:
+        labels:
+          app: oracle12c
+          deploymentconfig: oracle12c
+      spec:
+        containers:
+        - name: oracle12c
+          image: quay.io/justindav1s/oracle:12c
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 1521
+            protocol: TCP
+          - containerPort: 5500
+            protocol: TCP
+          resources:
+            limits:
+              memory: 4Gi
+            requests:
+              memory: 4Gi
+          securityContext: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /ORCL
+            name: orcl
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          fsGroup: 54321
+        serviceAccount: oracle
+        serviceAccountName: oracle
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: orcl
+          persistentVolumeClaim:
+            claimName: orcl
+    test: false
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: oracle12c
+    name: oracle12c
+  spec:
+    ports:
+    - name: 1521-tcp
+      port: 1521
+      protocol: TCP
+      targetPort: 1521
+    - name: 5500-tcp
+      port: 5500
+      protocol: TCP
+      targetPort: 5500
+    selector:
+      deploymentconfig: oracle12c
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}

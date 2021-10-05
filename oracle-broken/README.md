@@ -78,3 +78,20 @@ https://access.redhat.com/solutions/912183
 
 
 
+$ cp ~/Download/LINUX.X64_193000_db_home.zip ./docker-images/OracleDatabase/SingleInstance/dockerfiles/19.3.0/
+
+$ ./docker-images/OracleDatabase/SingleInstance/dockerfiles/19.3.0/buildDockerImage.sh -v 19.3.0 -e
+
+
+docker run
+docker run --name myOracle1930 \
+ -p 1521:1521 \
+ -p 5500:5500 \
+ -e ORACLE_SID=ORCLCDB \
+ -e ORACLE_PDB=ORCLPDB1 \
+ -e ORACLE_PWD=root \
+ -e INIT_SGA_SIZE=1024 \
+ -e INIT_PGA_SIZE=1024 \
+ -e ORACLE_CHARACTERSET=AL32UTF8 \
+ oracle/database:19.3.0-ee
+

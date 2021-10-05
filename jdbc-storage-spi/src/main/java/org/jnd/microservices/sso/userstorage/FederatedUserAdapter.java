@@ -135,6 +135,7 @@ public class FederatedUserAdapter extends AbstractUserAdapterFederatedStorage {
             log.info("Realm client : "+cm.getName()+" "+cm.getClientId()+" "+cm.getId());
             for (RoleModel rm : cm.getRoles()) {
                 log.info("Realm client role : "+cm.getClientId()+" "+rm.getName());
+                //Map roles from leg
             }
         }
         return rmset;
