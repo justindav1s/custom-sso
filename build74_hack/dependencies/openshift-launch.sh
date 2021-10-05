@@ -23,7 +23,7 @@ function runServer() {
 
   export NODE_NAME="${NODE_NAME:-node}-${count}"
 
-  source $JBOSS_HOME/bin/launch/configure.sh
+  #source $JBOSS_HOME/bin/launch/configure.sh
 
   log_info "Running $JBOSS_IMAGE_NAME image, version $JBOSS_IMAGE_VERSION"
 
