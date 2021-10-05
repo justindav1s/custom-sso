@@ -10,6 +10,8 @@ COPY dependencies/ojdbc8.jar /opt/eap/modules/system/layers/openshift/com/oracle
 
 COPY dependencies/openshift-launch.sh /opt/eap/bin
 
+COPY dependencies/configure.sh /opt/eap/bin/launch
+
 # RUN cp /opt/eap/standalone/configuration/standalone-openshift.xml /opt/eap/standalone/configuration/standalone-openshift.original
 
 # COPY dependencies/standalone-openshift-74.xml /opt/eap/standalone/configuration/standalone-openshift.xml
