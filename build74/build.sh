@@ -4,7 +4,7 @@ export IP=ocp.datr.eu
 export APP=custom-sso
 export PROJECT=$APP-build
 
-oc login https://${IP}:8443 -u justin
+oc login https://${IP} -u justin
 
 oc delete project $PROJECT
 oc new-project $PROJECT 2> /dev/null
