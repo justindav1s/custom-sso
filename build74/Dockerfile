@@ -35,6 +35,27 @@ RUN $EAP_HOME/bin/vault.sh --keystore $EAP_HOME/vault/vault.keystore \
     --salt 1234abcd
 
 RUN ls -ltr $EAP_HOME/vault
+
+RUN $EAP_HOME/bin/vault.sh --keystore $EAP_HOME/vault/vault.keystore \
+    --keystore-password vault22 \
+    --alias vault \
+    --check-sec-attr \
+    --vault-block vb \
+    --attribute db_user \
+    --enc-dir $EAP_HOME/vault/ \
+    --iteration 120 \
+    --salt 1234abcd
+
+RUN $EAP_HOME/bin/vault.sh --keystore $EAP_HOME/vault/vault.keystore \
+    --keystore-password vault22 \
+    --alias vault \
+    --check-sec-attr \
+    --vault-block vb \
+    --attribute db_password \
+    --enc-dir $EAP_HOME/vault/ \
+    --iteration 120 \
+    --salt 1234abcd
+
 COPY dependencies/sso-extensions.cli /opt/eap/extensions/
 COPY dependencies/ojdbc8.jar /opt/eap/extensions/ojdbc8.jar
 
