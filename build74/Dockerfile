@@ -56,6 +56,7 @@ RUN $EAP_HOME/bin/vault.sh --keystore $EAP_HOME/vault/vault.keystore \
     --iteration 120 \
     --salt 1234abcd
 
+COPY dependencies/openshift-launch.sh /opt/eap/bin
 COPY dependencies/sso-extensions.cli /opt/eap/extensions/
 COPY dependencies/ojdbc8.jar /opt/eap/extensions/ojdbc8.jar
 
