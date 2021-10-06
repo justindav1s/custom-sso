@@ -20,6 +20,11 @@ oc create secret generic sso-tls-secret --from-file=certs/${TLS_DOMAIN}.jks
 oc create secret generic sso-app-secret --from-file=certs/${TLS_DOMAIN}.jks
 oc secrets link default sso-jgroup-secret sso-tls-secret sso-app-secret
 
+oc create secret generic db-config \
+  --from-literal=db_username='keycloak' \
+  --from-literal=db_password='changeme' \
+  --from-literal=db_url='jdbc:oracle:thin:@oracle12c.oracle-test.svc.cluster.local:1521:ORCLCDB'
+
 oc new-app -f sso74-https.yaml \
  -p APPLICATION_NAME="sso" \
  -p HTTPS_SECRET="sso-tls-secret" \

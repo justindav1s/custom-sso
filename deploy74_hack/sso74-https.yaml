@@ -389,14 +389,19 @@ objects:
                 items:
                 - key: application-roles.properties
                   path: application-roles.properties
+                  mode: 0777
                 - key: application-users.properties
-                  path: application-users.properties                   
+                  path: application-users.properties 
+                  mode: 0777                  
                 - key: logging.properties
-                  path: logging.properties                   
+                  path: logging.properties
+                  mode: 0777                   
                 - key: mgmt-groups.properties
-                  path: mgmt-groups.properties 
+                  path: mgmt-groups.properties
+                  mode: 0777 
                 - key: mgmt-users.properties
                   path: mgmt-users.properties 
                 - key: standalone-openshift.xml
-                  path: standalone-openshift.xml 
+                  path: standalone-openshift.xml
+                  mode: 0777 
 
