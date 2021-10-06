@@ -5,6 +5,7 @@ JBOSS_HOME=/Users/justin/rh/rh-sso/rh-sso-7.4
 
 DB_USER=keycloak
 DB_PASSWORD=changeme
+DB_URL=jdbc:oracle:thin:@oracle12c.oracle-test.svc.cluster.local:1521:ORCLCDB
 
 rm -rf $VAULT_DIR/*
 
@@ -39,3 +40,14 @@ $JBOSS_HOME/bin/vault.sh \
     --enc-dir $VAULT_DIR \
     --iteration 120 \
     --salt 1234abcd  
+
+$JBOSS_HOME/bin/vault.sh \
+    --keystore $VAULT_DIR/vault.keystore \
+    --keystore-password vault22 \
+    --alias vault \
+    --vault-block vb \
+    --attribute db_url \
+    --sec-attr $DB_URL \
+    --enc-dir $VAULT_DIR \
+    --iteration 120 \
+    --salt 1234abcd      

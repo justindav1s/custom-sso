@@ -1,11 +1,8 @@
 batch
 
 set DB_DRIVER_NAME=oracle
-set DB_USERNAME='${VAULT::vb::db_user::1}'
-set DB_PASSWORD='${VAULT::vb::db_password::1}'
 set DB_DRIVER=oracle.jdbc.driver.OracleDriver
 set DB_XA_DRIVER=oracle.jdbc.xa.client.OracleXADataSource
-set DB_JDBC_URL=jdbc:oracle:thin:@oracle12c.oracle-test.svc.cluster.local:1521:ORCLCDB
 set DB_EAP_MODULE=com.oracle
 
 set FILE=/opt/eap/extensions/ojdbc8.jar
@@ -22,7 +19,7 @@ module add --name=$DB_EAP_MODULE --resources=$FILE --dependencies=javax.api,java
   jndi-name=java:jboss/datasources/KeycloakDS, \
   enabled=true, \
   use-java-context=true, \
-  connection-url=$DB_JDBC_URL, \
+  connection-url=${VAULT::vb::db_url::1}, \
   driver-name=$DB_DRIVER_NAME, \
   user-name=${VAULT::vb::db_user::1}, \
   password=${VAULT::vb::db_password::1} \
