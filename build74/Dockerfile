@@ -22,6 +22,8 @@ RUN $EAP_HOME/bin/vault.sh --keystore $EAP_HOME/vault/vault.keystore \
     --iteration 120 \
     --salt 1234abcd
 
+RUN ls -ltr $EAP_HOME/vault
+
 RUN $EAP_HOME/bin/vault.sh --keystore $EAP_HOME/vault/vault.keystore \
     --keystore-password vault22 \
     --alias vault \
