@@ -1,8 +1,8 @@
 batch
 
 set DB_DRIVER_NAME=oracle
-set DB_USERNAME=VAULT::vb::db_user::1
-set DB_PASSWORD=VAULT::vb::db_password::1
+set DB_USERNAME='${VAULT::vb::db_user::1}'
+set DB_PASSWORD='${VAULT::vb::db_password::1}'
 set DB_DRIVER=oracle.jdbc.driver.OracleDriver
 set DB_XA_DRIVER=oracle.jdbc.xa.client.OracleXADataSource
 set DB_JDBC_URL=jdbc:oracle:thin:@oracle12c.oracle-test.svc.cluster.local:1521:ORCLCDB
