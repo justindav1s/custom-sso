@@ -16,8 +16,18 @@ RUN $EAP_HOME/bin/vault.sh --keystore $EAP_HOME/vault/vault.keystore \
     --keystore-password vault22 \
     --alias vault \
     --vault-block vb \
-    --attribute password \
-    --sec-attr 0penS3sam3 \
+    --attribute db_user \
+    --sec-attr keycloak \
+    --enc-dir $EAP_HOME/vault/ \
+    --iteration 120 \
+    --salt 1234abcd
+
+RUN $EAP_HOME/bin/vault.sh --keystore $EAP_HOME/vault/vault.keystore \
+    --keystore-password vault22 \
+    --alias vault \
+    --vault-block vb \
+    --attribute db_password \
+    --sec-attr changeme \
     --enc-dir $EAP_HOME/vault/ \
     --iteration 120 \
     --salt 1234abcd

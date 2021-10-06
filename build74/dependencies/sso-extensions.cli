@@ -28,4 +28,12 @@ module add --name=$DB_EAP_MODULE --resources=$FILE --dependencies=javax.api,java
   password=$DB_PASSWORD \
 )
 
+/core-service=vault:add( \
+  vault-options=[("KEYSTORE_URL" => "EAP_HOME/vault/vault.keystore"), \
+  ("KEYSTORE_PASSWORD" => "MASK-5dOaAVafCSd"), \
+  ("KEYSTORE_ALIAS" => "vault"), \
+  ("SALT" => "1234abcd"), \
+  ("ITERATION_COUNT" => "120"), \
+  ("ENC_FILE_DIR" => "EAP_HOME/vault/")])
+
 run-batch
