@@ -6,3 +6,8 @@ TLS Paths
 
 
 docker run --name sso --rm -i -t quay.io/justindav1s/custom-sso:latest bash
+
+
+# jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle12c.oracle-test.svc.cluster.local})(PORT=1521))(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=ORCLCDB})))
+# jdbc:oracle:thin:@oracle12c.oracle-test.svc.cluster.local:1521:ORCLCDB
+# jdbc:oracle:thin:@(description=(address_list=(address=(protocol=tcp)(port=1521)(host=oracle12c.oracle-test.svc.cluster.local)))(connect_data=(INSTANCE_NAME=ORCLCDB)))
