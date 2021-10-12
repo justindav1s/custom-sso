@@ -17,6 +17,8 @@ oc login https://${IP} -u $USER
 
 oc project $PROJECT
 
+oc delete buildConfig custom-sso-docker-build -n $PROJECT
+
 oc create secret docker-registry quay-dockercfg \
   --docker-server=${QUAYIO_HOST} \
   --docker-username=${QUAYIO_USER} \
