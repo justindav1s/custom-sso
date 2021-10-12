@@ -19,10 +19,10 @@ module add --name=$DB_EAP_MODULE --resources=$FILE --dependencies=javax.api,java
   jndi-name=java:jboss/datasources/KeycloakDS, \
   enabled=true, \
   use-java-context=true, \
-  connection-url="${env.DB_URL}" \
+  connection-url='${env.DB_URL}' \
   driver-name=$DB_DRIVER_NAME, \
-  user-name="${env.DB_USER}", \
-  password="${env.DB_PASSWORD}" \
+  user-name='${env.DB_USER}', \
+  password='${env.DB_PASSWORD}' \
 )
 
 run-batch
