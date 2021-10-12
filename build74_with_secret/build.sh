@@ -31,7 +31,7 @@ oc process -f docker-build-template.yaml \
     -p APPLICATION_NAME=custom-sso \
     -p SOURCE_REPOSITORY_URL="https://github.com/justindav1s/custom-sso.git" \
     -p SOURCE_REPOSITORY_REF="master" \
-    -p DOCKERFILE_PATH="build74_with_vault" \
+    -p DOCKERFILE_PATH="build74_with_secret" \
     -p DOCKERFILE_NAME="Dockerfile" \
     -n ${PROJECT} | oc apply -f -
 
