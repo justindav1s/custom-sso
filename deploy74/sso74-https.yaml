@@ -291,7 +291,7 @@ objects:
                     - /bin/bash
                     - '-c'
                     - /opt/eap/bin/livenessProbe.sh
-                initialDelaySeconds: 60
+                initialDelaySeconds: 360
               readinessProbe:
                 exec:
                   command:
@@ -364,14 +364,4 @@ objects:
                   value: /etc/sso-secret-volume
                 - name: SSO_TRUSTSTORE_PASSWORD
                   value: '${SSO_TRUSTSTORE_PASSWORD}'
-          volumes:
-            - name: eap-keystore-volume
-              secret:
-                secretName: '${HTTPS_SECRET}'
-            - name: eap-jgroups-keystore-volume
-              secret:
-                secretName: '${JGROUPS_ENCRYPT_SECRET}'
-            - name: sso-truststore-volume
-              secret:
-                secretName: '${SSO_TRUSTSTORE_SECRET}'
 
