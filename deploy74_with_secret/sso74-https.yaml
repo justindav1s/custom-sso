@@ -284,7 +284,11 @@ objects:
               image: ${IMAGE_URL}
               resources:
                 limits:
-                  memory: '${MEMORY_LIMIT}'               
+                  memory: '${MEMORY_LIMIT}' 
+              volumeMounts:
+                - name: db-properties-volume
+                  mountPath: /etc/sso
+                  readOnly: true                                
               livenessProbe:
                 exec:
                   command:
@@ -378,4 +382,8 @@ objects:
                   valueFrom:
                     secretKeyRef:
                       name: db-secret
-                      key: DB_URL                      
+                      key: DB_URL
+          volumes:
+            - name: db-properties-volume
+              secret:
+                secretName: db-properties                                            

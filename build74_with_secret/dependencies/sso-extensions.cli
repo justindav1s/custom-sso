@@ -8,6 +8,10 @@ set DB_EAP_MODULE=com.oracle
 
 set FILE=/opt/eap/extensions/ojdbc8.jar
 
+/system-property=DB_URL:add(value="${DB_URL}")
+/system-property=DB_USER:add(value="${DB_USER}")
+/system-property=DB_PASSWORD:add(value="${DB_PASSWORD}")
+
 module add --name=$DB_EAP_MODULE --resources=$FILE --dependencies=javax.api,javax.resource.api
 /subsystem=datasources/jdbc-driver=$DB_DRIVER_NAME:add( \
   driver-name=$DB_DRIVER_NAME, \

@@ -9,5 +9,6 @@ RUN sed -i "s/<resolve-parameter-values>false<\/resolve-parameter-values>/ \
 
 COPY dependencies/sso-extensions.cli /opt/eap/extensions/
 COPY dependencies/ojdbc8.jar /opt/eap/extensions/ojdbc8.jar
+COPY dependencies/configure_sso_cli_extensions.sh /opt/eap/bin/launch
 
 USER 1001
