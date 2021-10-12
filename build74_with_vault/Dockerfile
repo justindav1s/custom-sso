@@ -1,4 +1,4 @@
-FROM image-registry.openshift-image-registry.svc:5000/openshift/sso74-openshift-rhel8
+FROM registry.redhat.io/rh-sso-7/sso74-openshift-rhel8:7.4-37
 
 USER root
 
