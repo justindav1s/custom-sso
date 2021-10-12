@@ -4,13 +4,13 @@ oc login https://${IP} -u justin
 
 PROJECT=redhat-sso
 
-oc delete project $PROJECT
-oc new-project $PROJECT 2> /dev/null
-while [ $? \> 0 ]; do
-    sleep 1
-    printf "."
-oc new-project $PROJECT 2> /dev/null
-done
+# oc delete project $PROJECT
+# oc new-project $PROJECT 2> /dev/null
+# while [ $? \> 0 ]; do
+#     sleep 1
+#     printf "."
+# oc new-project $PROJECT 2> /dev/null
+# done
 
 
 oc project $PROJECT
