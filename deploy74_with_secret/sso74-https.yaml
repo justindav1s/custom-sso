@@ -284,24 +284,18 @@ objects:
               image: ${IMAGE_URL}
               resources:
                 limits:
-                  memory: '${MEMORY_LIMIT}' 
-              volumeMounts:
-                - name: db-properties-volume
-                  mountPath: /etc/sso
-                  readOnly: true                                
+                  memory: '${MEMORY_LIMIT}'                               
               livenessProbe:
-                exec:
-                  command:
-                    - /bin/bash
-                    - '-c'
-                    - /opt/eap/bin/livenessProbe.sh
+                httpGet:
+                  path: /
+                  port: 8080
+                  scheme: HTTP
                 initialDelaySeconds: 60
               readinessProbe:
-                exec:
-                  command:
-                    - /bin/bash
-                    - '-c'
-                    - /opt/eap/bin/readinessProbe.sh
+                httpGet:
+                  path: /
+                  port: 8080
+                  scheme: HTTP
               ports:
                 - name: jolokia
                   containerPort: 8778
@@ -382,8 +376,4 @@ objects:
                   valueFrom:
                     secretKeyRef:
                       name: db-secret
-                      key: DB_URL
-          volumes:
-            - name: db-properties-volume
-              secret:
-                secretName: db-properties                                            
+                      key: DB_URL                                           
