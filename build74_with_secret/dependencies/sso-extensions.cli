@@ -4,7 +4,7 @@ set DB_DRIVER_NAME=oracle
 set DB_DRIVER=oracle.jdbc.driver.OracleDriver
 set DB_XA_DRIVER=oracle.jdbc.xa.client.OracleXADataSource
 set DB_EAP_MODULE=com.oracle
-set DB_URL=${env.DB_URL}
+
 
 set FILE=/opt/eap/extensions/ojdbc8.jar
 
@@ -20,7 +20,7 @@ module add --name=$DB_EAP_MODULE --resources=$FILE --dependencies=javax.api,java
   jndi-name=java:jboss/datasources/KeycloakDS, \
   enabled=true, \
   use-java-context=true, \
-  connection-url=$DB_URL \
+  connection-url=$env.DB_URL \
   driver-name=$DB_DRIVER_NAME, \
   user-name='${env.DB_USER}', \
   password='${env.DB_PASSWORD}' \
