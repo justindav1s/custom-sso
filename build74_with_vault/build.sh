@@ -35,6 +35,4 @@ oc process -f docker-build-template.yaml \
     -p DOCKERFILE_NAME="Dockerfile" \
     -n ${PROJECT} | oc apply -f -
 
-oc start-build custom-sso-docker-build --follow
-
 

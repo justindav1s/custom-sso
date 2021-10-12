@@ -191,27 +191,13 @@ objects:
         - port: 8080
           targetPort: 8080
       selector:
-        deploymentConfig: '${APPLICATION_NAME}'
+        deploymentConfig: '${APPLICATION_NAME}'       
     metadata:
       name: '${APPLICATION_NAME}'
       labels:
         application: '${APPLICATION_NAME}'
       annotations:
         description: The web server's http port.
-  - kind: Service
-    apiVersion: v1
-    spec:
-      ports:
-        - port: 8443
-          targetPort: 8443
-      selector:
-        deploymentConfig: '${APPLICATION_NAME}'
-    metadata:
-      name: 'secure-${APPLICATION_NAME}'
-      labels:
-        application: '${APPLICATION_NAME}'
-      annotations:
-        description: The web server's https port.
   - kind: Service
     apiVersion: v1
     spec:
@@ -241,21 +227,10 @@ objects:
       host: '${HOSTNAME_HTTP}'
       to:
         name: '${APPLICATION_NAME}'
-  - kind: Route
-    apiVersion: route.openshift.io/v1
-    id: '${APPLICATION_NAME}-https'
-    metadata:
-      name: 'secure-${APPLICATION_NAME}'
-      labels:
-        application: '${APPLICATION_NAME}'
-      annotations:
-        description: Route for application's https service.
-    spec:
-      host: '${HOSTNAME_HTTPS}'
-      to:
-        name: 'secure-${APPLICATION_NAME}'
       tls:
-        termination: passthrough
+        termination: edge
+        insecureEdgeTerminationPolicy: Redirect
+      wildcardPolicy: None         
   - kind: Deployment
     apiVersion: apps/v1
     metadata:
@@ -290,18 +265,16 @@ objects:
                   mountPath: /opt/eap/vault
                   readOnly: true                  
               livenessProbe:
-                exec:
-                  command:
-                    - /bin/bash
-                    - '-c'
-                    - /opt/eap/bin/livenessProbe.sh
-                initialDelaySeconds: 360
+                httpGet:
+                  path: /
+                  port: 8080
+                  scheme: HTTP
+                initialDelaySeconds: 60
               readinessProbe:
-                exec:
-                  command:
-                    - /bin/bash
-                    - '-c'
-                    - /opt/eap/bin/readinessProbe.sh
+                httpGet:
+                  path: /
+                  port: 8080
+                  scheme: HTTP
               ports:
                 - name: jolokia
                   containerPort: 8778
