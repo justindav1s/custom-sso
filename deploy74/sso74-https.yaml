@@ -178,6 +178,11 @@ parameters:
     name: MEMORY_LIMIT
     value: 1Gi
     required: false
+  - displayName: Image Url
+    description: Image Url
+    name: IMAGE_URL
+    value: ''
+    required: true
 objects:
   - kind: Service
     apiVersion: v1
@@ -276,7 +281,7 @@ objects:
             - name: '${APPLICATION_NAME}'
               image: '${APPLICATION_NAME}'
               imagePullPolicy: Always
-              image: 'quay.io/justindav1s/custom-sso:latest'
+              image: ${IMAGE_URL}
               resources:
                 limits:
                   memory: '${MEMORY_LIMIT}'
