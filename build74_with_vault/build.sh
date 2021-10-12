@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 
-export IP=api.sno.openshiftlabs.net:6443
-export APP=custom-sso
-export PROJECT=$APP-build
+IP=api.sno.openshiftlabs.net:6443
+APP=custom-sso
+PROJECT=$APP-build
+USER=justin
 
-oc login https://${IP} -u justin
+oc login https://${IP} -u $USER
 
-oc delete project $PROJECT
-oc new-project $PROJECT 2> /dev/null
-while [ $? \> 0 ]; do
-    sleep 1
-    printf "."
-oc new-project $PROJECT 2> /dev/null
-done
+# oc delete project $PROJECT
+# oc new-project $PROJECT 2> /dev/null
+# while [ $? \> 0 ]; do
+#     sleep 1
+#     printf "."
+# oc new-project $PROJECT 2> /dev/null
+# done
 
 oc project $PROJECT
 

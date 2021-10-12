@@ -5,13 +5,13 @@ oc login https://${IP} -u justin
 TLS_DOMAIN=openshiftlabs.net
 PROJECT=custom-sso
 
-oc delete project $PROJECT
-oc new-project $PROJECT 2> /dev/null
-while [ $? \> 0 ]; do
-    sleep 1
-    printf "."
-oc new-project $PROJECT 2> /dev/null
-done
+# oc delete project $PROJECT
+# oc new-project $PROJECT 2> /dev/null
+# while [ $? \> 0 ]; do
+#     sleep 1
+#     printf "."
+# oc new-project $PROJECT 2> /dev/null
+# done
 
 oc policy add-role-to-user view system:serviceaccount:${PROJECT}:default
 
