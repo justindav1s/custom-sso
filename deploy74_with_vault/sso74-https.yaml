@@ -178,6 +178,11 @@ parameters:
     name: MEMORY_LIMIT
     value: 1Gi
     required: false
+  - displayName: Image Url
+    description: Image Url
+    name: IMAGE_URL
+    value: ''
+    required: true    
 objects:
   - kind: Service
     apiVersion: v1
@@ -276,20 +281,11 @@ objects:
             - name: '${APPLICATION_NAME}'
               image: '${APPLICATION_NAME}'
               imagePullPolicy: Always
-              image: 'quay.io/justindav1s/custom-sso:latest'
+              image: ${IMAGE_URL}
               resources:
                 limits:
                   memory: '${MEMORY_LIMIT}'
               volumeMounts:
-                - name: eap-keystore-volume
-                  mountPath: /etc/eap-secret-volume
-                  readOnly: true
-                - name: eap-jgroups-keystore-volume
-                  mountPath: /etc/jgroups-encrypt-secret-volume
-                  readOnly: true
-                - name: sso-truststore-volume
-                  mountPath: /etc/sso-secret-volume
-                  readOnly: true
                 - name: jboss-vault-volume
                   mountPath: /opt/eap/vault
                   readOnly: true                  
@@ -299,7 +295,7 @@ objects:
                     - /bin/bash
                     - '-c'
                     - /opt/eap/bin/livenessProbe.sh
-                initialDelaySeconds: 60
+                initialDelaySeconds: 360
               readinessProbe:
                 exec:
                   command:
@@ -373,15 +369,15 @@ objects:
                 - name: SSO_TRUSTSTORE_PASSWORD
                   value: '${SSO_TRUSTSTORE_PASSWORD}'
           volumes:
-            - name: eap-keystore-volume
-              secret:
-                secretName: '${HTTPS_SECRET}'
-            - name: eap-jgroups-keystore-volume
-              secret:
-                secretName: '${JGROUPS_ENCRYPT_SECRET}'
-            - name: sso-truststore-volume
-              secret:
-                secretName: '${SSO_TRUSTSTORE_SECRET}'
+            # - name: eap-keystore-volume
+            #   secret:
+            #     secretName: '${HTTPS_SECRET}'
+            # - name: eap-jgroups-keystore-volume
+            #   secret:
+            #     secretName: '${JGROUPS_ENCRYPT_SECRET}'
+            # - name: sso-truststore-volume
+            #   secret:
+            #     secretName: '${SSO_TRUSTSTORE_SECRET}'
             - name: jboss-vault-volume
               secret:
                 secretName: jboss-vault
