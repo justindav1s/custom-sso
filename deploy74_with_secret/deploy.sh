@@ -18,8 +18,8 @@ oc create secret generic db-secret \
   --from-literal=DB_PASSWORD=changeme \
   --from-literal=DB_URL=jdbc:oracle:thin:@oracle12c.oracle-test.svc.cluster.local:1521:ORCLCDB
 
-oc create secret generic db-properties \
-  --from-file=secrets/db.properties  
+# oc create secret generic db-properties \
+#   --from-file=secrets/db.properties  
 
 oc new-app -f sso74-https.yaml \
  -p APPLICATION_NAME="sso" \
