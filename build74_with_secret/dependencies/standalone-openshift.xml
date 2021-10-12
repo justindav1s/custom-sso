@@ -43,11 +43,6 @@
                 </authorization>
             </security-realm>
             <security-realm name="ApplicationRealm">
-                <server-identities>
-                    <ssl>
-                        <keystore provider="JKS" path="/etc/eap-secret-volume/openshiftlabs.net.jks" keystore-password="changeme"/>
-                    </ssl>
-                </server-identities>
                 <authentication>
                     <local default-user="$local" allowed-users="*" skip-group-loading="true"/>
                     <properties path="application-users.properties" relative-to="jboss.server.config.dir"/>
@@ -433,20 +428,12 @@
                     <socket-protocol type="FD_SOCK" socket-binding="jgroups-udp-fd"/>
                     <protocol type="FD_ALL"/>
                     <protocol type="VERIFY_SUSPECT"/>
-                    <protocol type="org.jgroups.protocols.SYM_ENCRYPT">
-                        <property name="provider">SunJCE</property>
-                        <property name="sym_algorithm">AES</property>
-                        <property name="encrypt_entire_message">true</property>
-                        <property name="keystore_name">/etc/jgroups-encrypt-secret-volume/jgroups.jceks</property>
-                        <property name="store_password">changeme</property>
-                        <property name="alias">jgroups</property>
-                    </protocol>
                     <protocol type="pbcast.NAKACK2"/>
                     <protocol type="UNICAST3"/>
                     <protocol type="pbcast.STABLE"/>
                     <auth-protocol type="AUTH">
                         <digest-token algorithm="SHA-512">
-                            <shared-secret-reference clear-text="bfC1fw5d"/>
+                            <shared-secret-reference clear-text="k1jKlP3o"/>
                         </digest-token>
                     </auth-protocol>
                     <protocol type="pbcast.GMS"/>
@@ -464,20 +451,12 @@
                     <socket-protocol type="FD_SOCK" socket-binding="jgroups-tcp-fd"/>
                     <protocol type="FD_ALL"/>
                     <protocol type="VERIFY_SUSPECT"/>
-                    <protocol type="org.jgroups.protocols.SYM_ENCRYPT">
-                        <property name="provider">SunJCE</property>
-                        <property name="sym_algorithm">AES</property>
-                        <property name="encrypt_entire_message">true</property>
-                        <property name="keystore_name">/etc/jgroups-encrypt-secret-volume/jgroups.jceks</property>
-                        <property name="store_password">changeme</property>
-                        <property name="alias">jgroups</property>
-                    </protocol>
                     <protocol type="pbcast.NAKACK2"/>
                     <protocol type="UNICAST3"/>
                     <protocol type="pbcast.STABLE"/>
                     <auth-protocol type="AUTH">
                         <digest-token algorithm="SHA-512">
-                            <shared-secret-reference clear-text="bfC1fw5d"/>
+                            <shared-secret-reference clear-text="k1jKlP3o"/>
                         </digest-token>
                     </auth-protocol>
                     <protocol type="pbcast.GMS"/>
@@ -568,16 +547,6 @@
                 <default-provider>default</default-provider>
                 <provider name="default" enabled="true"/>
             </spi>
-            <spi name="truststore">
-                <provider name="file" enabled="true">
-                    <properties>
-                        <property name="file" value="/etc/sso-secret-volume/openshiftlabs.net.jks"/>
-                        <property name="password" value="changeme"/>
-                        <property name="hostname-verification-policy" value="WILDCARD"/>
-                        <property name="disabled" value="false"/>
-                    </properties>
-                </provider>
-            </spi>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:mail:3.0">
             <mail-session name="default" jndi-name="java:jboss/mail/Default">
@@ -655,7 +624,6 @@
             <server name="default-server">
                 <ajp-listener name="ajp" socket-binding="ajp"/>
                 <http-listener name="default" socket-binding="http" redirect-socket="proxy-https" proxy-address-forwarding="true" enable-http2="true"/>
-                <https-listener name="https" socket-binding="https" proxy-address-forwarding="true" security-realm="ApplicationRealm"/>
                 <host name="default-host" alias="localhost">
                     <location name="/" handler="sso-welcome-content"/>
                     <http-invoker security-realm="ApplicationRealm"/>

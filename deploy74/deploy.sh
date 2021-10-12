@@ -17,6 +17,10 @@ oc project $PROJECT
 
 oc policy add-role-to-user view system:serviceaccount:${PROJECT}:default
 
+oc delete deployment sso
+oc delete route -l application=sso
+oc delete service -l application=sso
+
 oc new-app -f sso74-https.yaml \
  -p APPLICATION_NAME="sso" \
  -p SSO_REALM="demorealm" \
