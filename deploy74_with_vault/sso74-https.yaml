@@ -369,15 +369,6 @@ objects:
                 - name: SSO_TRUSTSTORE_PASSWORD
                   value: '${SSO_TRUSTSTORE_PASSWORD}'
           volumes:
-            # - name: eap-keystore-volume
-            #   secret:
-            #     secretName: '${HTTPS_SECRET}'
-            # - name: eap-jgroups-keystore-volume
-            #   secret:
-            #     secretName: '${JGROUPS_ENCRYPT_SECRET}'
-            # - name: sso-truststore-volume
-            #   secret:
-            #     secretName: '${SSO_TRUSTSTORE_SECRET}'
             - name: jboss-vault-volume
               secret:
                 secretName: jboss-vault
