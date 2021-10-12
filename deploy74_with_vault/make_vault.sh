@@ -5,7 +5,7 @@ JBOSS_HOME=/Users/justin/rh/rh-sso/rh-sso-7.4
 
 DB_USER=keycloak
 DB_PASSWORD=changeme
-DB_HOST=oracle12c.oracle-test.svc.cluster.local
+DB_URL='jdbc:oracle:thin:@(description=(address_list=(address=(protocol=tcp)(port=1521)(host=oracle12c.oracle-test.svc.cluster.local)))(connect_data=(SID=ORCLCDB)))'
 DB_SERVICE=ORCLCDB
 
 rm -rf $VAULT_DIR/*
@@ -47,19 +47,8 @@ $JBOSS_HOME/bin/vault.sh \
     --keystore-password vault22 \
     --alias vault \
     --vault-block vb \
-    --attribute db_host \
-    --sec-attr $DB_HOST \
+    --attribute db_url \
+    --sec-attr $DB_URL \
     --enc-dir $VAULT_DIR \
     --iteration 120 \
-    --salt 1234abcd  
-
-$JBOSS_HOME/bin/vault.sh \
-    --keystore $VAULT_DIR/vault.keystore \
-    --keystore-password vault22 \
-    --alias vault \
-    --vault-block vb \
-    --attribute db_service \
-    --sec-attr $DB_SERVICE \
-    --enc-dir $VAULT_DIR \
-    --iteration 120 \
-    --salt 1234abcd         
+    --salt 1234abcd        
