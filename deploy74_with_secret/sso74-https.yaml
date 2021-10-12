@@ -295,7 +295,7 @@ objects:
                     - /bin/bash
                     - '-c'
                     - /opt/eap/bin/livenessProbe.sh
-                initialDelaySeconds: 360
+                initialDelaySeconds: 60
               readinessProbe:
                 exec:
                   command:
