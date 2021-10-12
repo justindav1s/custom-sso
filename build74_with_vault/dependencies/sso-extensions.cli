@@ -20,7 +20,7 @@ module add --name=$DB_EAP_MODULE --resources=$FILE --dependencies=javax.api,java
   jndi-name=java:jboss/datasources/KeycloakDS, \
   enabled=true, \
   use-java-context=true, \
-  connection-url=$DB_URL, \
+  connection-url=jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=${VAULT::vb::db_host::1})(PORT=1521))(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=${VAULT::vb::db_service::1}))), \
   driver-name=$DB_DRIVER_NAME, \
   user-name=${VAULT::vb::db_user::1}, \
   password=${VAULT::vb::db_password::1} \

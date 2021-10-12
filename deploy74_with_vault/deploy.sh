@@ -9,6 +9,7 @@ oc project ${PROJECT}
 oc delete deployment sso
 oc delete route -l application=sso
 oc delete service -l application=sso
+oc delete secret jboss-vault
 
 oc policy add-role-to-user view system:serviceaccount:${PROJECT}:default
 
