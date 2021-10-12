@@ -178,6 +178,11 @@ parameters:
     name: MEMORY_LIMIT
     value: 1Gi
     required: false
+  - displayName: Image Url
+    description: Image Url
+    name: IMAGE_URL
+    value: ''
+    required: true
 objects:
   - kind: Service
     apiVersion: v1
@@ -251,29 +256,19 @@ objects:
         name: 'secure-${APPLICATION_NAME}'
       tls:
         termination: passthrough
-  - kind: DeploymentConfig
-    apiVersion: apps.openshift.io/v1
+  - kind: Deployment
+    apiVersion: apps/v1
     metadata:
       name: '${APPLICATION_NAME}'
       labels:
         application: '${APPLICATION_NAME}'
     spec:
       strategy:
-        type: Recreate
-      triggers:
-        - type: ImageChange
-          imageChangeParams:
-            automatic: true
-            containerNames:
-              - '${APPLICATION_NAME}'
-            from:
-              kind: ImageStreamTag
-              namespace: '${IMAGE_STREAM_NAMESPACE}'
-              name: 'sso74-openshift-rhel8:7.4'
-        - type: ConfigChange
+        type: RollingUpdate
       replicas: 1
       selector:
-        deploymentConfig: '${APPLICATION_NAME}'
+        matchLabels:
+          deploymentConfig: '${APPLICATION_NAME}'
       template:
         metadata:
           name: '${APPLICATION_NAME}'
@@ -286,19 +281,10 @@ objects:
             - name: '${APPLICATION_NAME}'
               image: '${APPLICATION_NAME}'
               imagePullPolicy: Always
+              image: ${IMAGE_URL}
               resources:
                 limits:
                   memory: '${MEMORY_LIMIT}'
-              volumeMounts:
-                - name: eap-keystore-volume
-                  mountPath: /etc/eap-secret-volume
-                  readOnly: true
-                - name: eap-jgroups-keystore-volume
-                  mountPath: /etc/jgroups-encrypt-secret-volume
-                  readOnly: true
-                - name: sso-truststore-volume
-                  mountPath: /etc/sso-secret-volume
-                  readOnly: true
               livenessProbe:
                 exec:
                   command:
@@ -378,13 +364,4 @@ objects:
                   value: /etc/sso-secret-volume
                 - name: SSO_TRUSTSTORE_PASSWORD
                   value: '${SSO_TRUSTSTORE_PASSWORD}'
-          volumes:
-            - name: eap-keystore-volume
-              secret:
-                secretName: '${HTTPS_SECRET}'
-            - name: eap-jgroups-keystore-volume
-              secret:
-                secretName: '${JGROUPS_ENCRYPT_SECRET}'
-            - name: sso-truststore-volume
-              secret:
-                secretName: '${SSO_TRUSTSTORE_SECRET}'
+

@@ -1,8 +1,0 @@
-TLS Paths
-
-/Users/justin/acme/certs/openshiftlabs.net/fullchain.cer
-/Users/justin/acme/certs/openshiftlabs.net/openshiftlabs.net.cer
-/Users/justin/acme/certs/openshiftlabs.net/openshiftlabs.net.key
-
-
-docker run --name sso --rm -i -t quay.io/justindav1s/custom-sso:latest bash

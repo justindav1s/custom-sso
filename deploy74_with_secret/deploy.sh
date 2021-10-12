@@ -4,14 +4,6 @@
 
 PROJECT=redhat-sso2
 
-# oc delete project $PROJECT
-# oc new-project $PROJECT 2> /dev/null
-# while [ $? \> 0 ]; do
-#     sleep 1
-#     printf "."
-# oc new-project $PROJECT 2> /dev/null
-# done
-
 oc project $PROJECT
 oc delete deployment sso
 oc delete route -l application=sso

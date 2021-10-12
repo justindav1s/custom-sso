@@ -236,26 +236,15 @@ objects:
       labels:
         application: '${APPLICATION_NAME}'
       annotations:
-        description: Route for application's http service.
+        description: Secure Route for application's http service.
     spec:
       host: '${HOSTNAME_HTTP}'
       to:
         name: '${APPLICATION_NAME}'
-  - kind: Route
-    apiVersion: route.openshift.io/v1
-    id: '${APPLICATION_NAME}-https'
-    metadata:
-      name: 'secure-${APPLICATION_NAME}'
-      labels:
-        application: '${APPLICATION_NAME}'
-      annotations:
-        description: Route for application's https service.
-    spec:
-      host: '${HOSTNAME_HTTPS}'
-      to:
-        name: 'secure-${APPLICATION_NAME}'
       tls:
-        termination: passthrough
+        termination: edge
+        insecureEdgeTerminationPolicy: Redirect
+      wildcardPolicy: None
   - kind: Deployment
     apiVersion: apps/v1
     metadata:
@@ -284,7 +273,7 @@ objects:
               image: ${IMAGE_URL}
               resources:
                 limits:
-                  memory: '${MEMORY_LIMIT}'                               
+                  memory: '${MEMORY_LIMIT}'                                              
               livenessProbe:
                 httpGet:
                   path: /
@@ -376,4 +365,4 @@ objects:
                   valueFrom:
                     secretKeyRef:
                       name: db-secret
-                      key: DB_URL                                           
+                      key: DB_URL                                                                
