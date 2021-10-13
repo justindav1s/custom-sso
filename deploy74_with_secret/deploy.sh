@@ -12,8 +12,7 @@ oc delete route -l application=$APP
 oc delete service -l application=$APP
 oc delete secret db-secret
 
-DB_URL="jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=((ADDRESS=(PROTOCOL=TCP)(HOST=i1cnsyora1.intisbank)(PORT=1521))))(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=SRV_REDHATSSO2DEV_ICNSY)))"
-#:DB_URL="jdbc:oracle:thin:@(description=(address_list=(address=(protocol=tcp)(port=1521)(host=oracle12c.oracle-test.svc.cluster.local)))(connect_data=(SID=ORCLCDB)))"
+DB_URL="jdbc:oracle:thin:@(description=(address_list=(address=(protocol=tcp)(port=1521)(host=oracle12c.oracle-test.svc.cluster.local)))(connect_data=(SID=ORCLCDB)))"
 oc policy add-role-to-user view system:serviceaccount:${PROJECT}:default
 
 oc create secret generic db-secret \
@@ -26,4 +25,5 @@ oc new-app -f sso74-https.yaml \
  -p APPLICATION_NAME=$APP \
  -p SSO_REALM="demorealm" \
  -p MEMORY_LIMIT="2Gi" \
+ -p HOSTNAME_HTTP="testing.apps.sno.openshiftlabs.net" \
  -p IMAGE_URL='quay.io/justindav1s/custom-sso:latest'
