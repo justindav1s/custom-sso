@@ -5,7 +5,7 @@ set DB_DRIVER=oracle.jdbc.driver.OracleDriver
 set DB_XA_DRIVER=oracle.jdbc.xa.client.OracleXADataSource
 set DB_EAP_MODULE=com.oracle
 
-set FILE=/opt/eap/extensions/ojdbc8.jar
+set FILE=/opt/eap/extensions/ojdbc10.jar
 
 module add --name=$DB_EAP_MODULE --resources=$FILE --dependencies=javax.api,javax.resource.api
 
