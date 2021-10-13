@@ -12,13 +12,14 @@ oc delete route -l application=$APP
 oc delete service -l application=$APP
 oc delete secret db-secret
 
-
+DB_URL="jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=((ADDRESS=(PROTOCOL=TCP)(HOST=i1cnsyora1.intisbank)(PORT=1521))))(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=SRV_REDHATSSO2DEV_ICNSY)))"
+#DB_URL="jdbc:oracle:thin:@(description=(address_list=(address=(protocol=tcp)(port=1521)(host=oracle12c.oracle-test.svc.cluster.local)))(connect_data=(SID=ORCLCDB)))"
 oc policy add-role-to-user view system:serviceaccount:${PROJECT}:default
 
 oc create secret generic db-secret \
   --from-literal=DB_USER=keycloak \
   --from-literal=DB_PASSWORD=changeme \
-  --from-literal=DB_URL="jdbc:oracle:thin:@(description=(address_list=(address=(protocol=tcp)(port=1521)(host=oracle12c.oracle-test.svc.cluster.local)))(connect_data=(SID=ORCLCDB)))"
+  --from-literal=DB_URL=$DB_URL
 
 
 oc new-app -f sso74-https.yaml \
